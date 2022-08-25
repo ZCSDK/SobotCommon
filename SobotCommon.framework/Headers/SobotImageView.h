@@ -10,19 +10,19 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  UIImageViewURLDownloadState  ENUM
+ *  SobotUIImageViewURLDownloadState  ENUM
  */
-typedef NS_ENUM(NSInteger, UIImageViewURLDownloadState) {
+typedef NS_ENUM(NSInteger, SobotUIImageViewURLDownloadState) {
     /** 未知状态 */
-    UIImageViewURLDownloadStateUnknown = 0,
+    SobotUIImageViewURLDownloadStateUnknown = 0,
     /** 加载 */
-    UIImageViewURLDownloadStateLoaded,
+    SobotUIImageViewURLDownloadStateLoaded,
     /** 等待加载 */
-    UIImageViewURLDownloadStateWaitingForLoad,
+    SobotUIImageViewURLDownloadStateWaitingForLoad,
     /** 重新加载 */
-    UIImageViewURLDownloadStateNowLoading,
+    SobotUIImageViewURLDownloadStateNowLoading,
     /** 加载失败 */
-    UIImageViewURLDownloadStateFailed,
+    SobotUIImageViewURLDownloadStateFailed,
 };
 
 
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, UIImageViewURLDownloadState) {
 @property (nonatomic, strong) NSURL *url;
 
 // download state
-@property (nonatomic, readonly) UIImageViewURLDownloadState loadingState;
+@property (nonatomic, readonly) SobotUIImageViewURLDownloadState loadingState;
 
 // UI
 @property (nonatomic, strong) UIView *loadingView;

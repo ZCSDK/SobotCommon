@@ -88,8 +88,11 @@
 // View的Y轴坐标
 #define SobotViewY(v)                            v.frame.origin.y
 
-#define sobotWeakSelf(var) __weak typeof(var) XYWeak_##var = var;
-#define sobotStrogSelf(var) \
+// 用法示例SoobtBlockWeakSelf(weakSelf);
+#define SoobtBlockWeakSelf(weakSelf)  __weak __typeof(&*self)weakSelf = self;
+
+#define SobotWeakSelf(var) __weak typeof(var) XYWeak_##var = var;
+#define SobotStrogSelf(var) \
 _Pragma("clang diagnostic push") \
 _Pragma("clang diagnostic ignored \"-Wshadow\"") \
 __strong typeof(var) var = XYWeak_##var; \

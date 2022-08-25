@@ -38,12 +38,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 根据bundle中的string文件的key获取color
 /// @param hexColorKey  颜色的key，比如，Sobotline.bundle/dark.color--SobotColor.string文件中定义
 +(UIColor *)getSobotThemeModeColor:(NSString *)hexColorKey;
++(UIColor *)getSobotThemeModeColor:(NSString *)hexColorKey bundleName:(NSString *)bundleName;
 
 
 /// 根据bundle中的string文件的key获取color
 /// @param hexColorKey  颜色的key，比如，Sobotline.bundle/dark.color--SobotColor.string文件中定义
 /// @param alpha 指定透明度
-+(UIColor *)getSobotThemeModeColor:(NSString *)hexColorKey alpha:(CGFloat) alpha;
++(UIColor *)getSobotThemeModeColor:(NSString *)hexColorKey alpha:(CGFloat) alpha bundleName:(NSString *)bundleName;
 
 
 /// 根据SobotTypeColor 获取hexKey
@@ -58,6 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 读取图片资源
 +(UIImage *)getSysImageByName:(NSString *)imageName;
++(UIImage *)getSysImageByName:(NSString *)imageName bundleName:(NSString *) bundleName;
 // 读取图片资源
 +(UIImage *)getSysImageByName:(NSString *)imageName bundle:(NSBundle * __nullable) budle;
 

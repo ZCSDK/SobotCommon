@@ -25,6 +25,10 @@ NSString *sobotGetCommonVersion(void);
 NSString *sobotConvertToString(id object);
 
 
+/// int 转字符串
+/// @param number num
+NSString *sobotConvertIntToString(int number);
+
 /// 生成随机字符串
 /// @param len 字符串长度
 NSString * sobotRandom32bitString(int len);
@@ -42,6 +46,9 @@ NSString *sobotSHA256(NSString *inputString);
 /// 格式化url
 /// @param url  字符串
 NSString *sobotUrlEncodedString(NSString *url);
+
+// 号码隐藏 0.不隐藏 1.中间隐藏 2.末尾隐藏  电销任务数据号码是否隐藏
+NSString * sobotNumberSuitScanf(NSString*number,int scanfType);
 
 /**
  *  去掉首尾部空格
@@ -197,6 +204,17 @@ BOOL sobotIsIPhoneX(void);
 
 /// 获取当前展示的window
 UIWindow *sobotGetCurWindow(void);
+
+/// 获取时间 几小时前 几天前 几月前
+NSString *SobotIntervalSinceSimpleNow(NSString *theDate);
+
+NSString * SobotLongLongDateTransformString(NSString* fromate,long long longdate);
+
+NSString * SobotShortDateTransformString(NSString* fromate,long long longdate);
+
+NSInteger SobotGetDataDay(NSDate *date);
+
+NSString * SobotDateTransformString(NSString* fromate,NSDate*date);
 
 
 @end

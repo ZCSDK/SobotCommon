@@ -27,6 +27,14 @@
 #import <SobotCommon/SobotEmojiLabel.h>
 #import <SobotCommon/SobotToast.h>
 #import <SobotCommon/SobotLayoutTools.h>
+#import <SobotCommon/SobotKxMenu.h>
+#import <SobotCommon/SobotPickView.h>
+#import <SobotCommon/SobotDatePickView.h>
+#import <SobotCommon/SobotSheetView.h>
+#import <SobotCommon/SobotActionSheetView.h>
+#import <SobotCommon/SobotAlertView.h>
+#import <SobotCommon/SobotButtonUpDown.h>
+
 
 //! Project version number for SobotCommon.
 FOUNDATION_EXPORT double SobotCommonVersionNumber;

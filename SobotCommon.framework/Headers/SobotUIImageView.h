@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong) NSString *imageName;
 @property(nonatomic,strong) NSString *borderColorName;
+@property(nonatomic,strong) NSString *bundleName;
 
 @end
 

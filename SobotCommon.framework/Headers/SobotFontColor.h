@@ -65,13 +65,14 @@ static SobotTypeColor const SobotColorBgSub2  = @"SobotColorBgSub2";// 搜索等
 static SobotTypeColor const SobotColorBgSub3  = @"SobotBgSub3Color";// 搜索等次级背景"#FFFFFF";
 static SobotTypeColor const SobotColorBlack = @"SobotBlackColor";//纯黑色"#000000";
 static SobotTypeColor const SobotColorWhite = @"SobotWhiteColor";//纯白色"#FFFFFF";
-static SobotTypeColor const SobotColorYellow = @"SobotYellowColor";//纯白色"#F8C46E";
+static SobotTypeColor const SobotColorYellow = @"SobotYellowColor";//黄色"#F8C46E";
 static SobotTypeColor const SobotColorRed  = @"SobotColorRed";// 红色标记颜色 #FF6D63
 static SobotTypeColor const SobotColorBgTransferList = @"SobotColorBgTransferList";
 static SobotTypeColor const SobotColorBgWhite = @"SobotColorBgWhite";
 static SobotTypeColor const SobotColorBgTitle = @"SobotColorBgTitle"; // 接单按钮背景颜色和工单详情页选选项卡选中状态文字颜色
 static SobotTypeColor const SobotColorBgActionSheetView = @"SobotColorBgActionSheetView"; // 排序弹窗背景色
-
+static SobotTypeColor const SobotColorBgGreen = @"SobotColorBgGreen";// 果绿色 #21CFA6
+static SobotTypeColor const SobotColorBgGray = @"SobotColorBgGray"; // 淡灰色 #CFCFCF
 
 // 文字颜色
 static SobotTypeColor const SobotColorTextMain = @"SobotColorTextMain";//主文本颜色
@@ -89,6 +90,7 @@ static SobotTypeColor const SobotColorTextWhite = @"SobotColorTextWhite";// 白�
 
 // 线条颜色
 static SobotTypeColor const SobotColorBgLine  = @"SobotColorBgLine";// 线条颜色"#2C2C2C";分割线
+static SobotTypeColor const SobotColorSeparatorLine = @"SobotColorSeparatorLine";// 分割线颜色
 
 // 链接颜色
 static SobotTypeColor const SobotColorTextLink = @"SobotTextLinkColor";//链接文本颜色"#0DAEAF";
@@ -106,12 +108,16 @@ static SobotTypeColor const SobotTextOrderStatus3 = @"SobotTextOrderStatus3"; //
 static SobotTypeColor const SobotTextOrderStatus4 = @"SobotTextOrderStatus4"; // 工单状态文字颜色
 static SobotTypeColor const SobotTextOrderStatus5 = @"SobotTextOrderStatus5"; // 工单状态文字颜色
 
-
-
+// 呼叫任务状态背景色
+static SobotTypeColor const SobotTextCallStatus1 = @"SobotTextCallStatus1"; // 呼叫状态文字颜色
+static SobotTypeColor const SobotTextCallStatus3 = @"SobotTextCallStatus3"; // 呼叫状态文字颜色
 
 // 颜色
-#define UIColorFromModeColor(themeColorKey) [SobotUITools getSobotThemeModeColor:themeColorKey]
-#define UIColorFromModeColorAlpha(themeColorKey,a) [SobotUITools getSobotThemeModeColor:themeColorKey alpha:a]
+#define UIColorFromModeColor(themeColorKey) [SobotUITools getSobotThemeModeColor:themeColorKey  bundleName:@""]
+#define UIColorFromModeColorAlpha(themeColorKey,a) [SobotUITools getSobotThemeModeColor:themeColorKey alpha:a  bundleName:@""]
+
+#define UIColorFromModeColorBundleName(themeColorKey,_bundleName) [SobotUITools getSobotThemeModeColor:themeColorKey  bundleName:_bundleName]
+#define UIColorFromModeColorAlphaBundleName(themeColorKey,a,bundleName) [SobotUITools getSobotThemeModeColor:themeColorKey alpha:a bundleName:bundleName]
 
 // 颜色取值方法
 #define SobotRgbColor(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]

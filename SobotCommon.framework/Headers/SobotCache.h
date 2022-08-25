@@ -15,7 +15,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SobotCache : NSObject
 
+// SobotThemeMode,默认0
+//SobotThemeMode_Default    = 0, // 默认，跟随系统
+//SobotThemeMode_Dark       = 1, // 暗黑模式
+//SobotThemeMode_Light      = 2, // 亮色模式
+@property(nonatomic,assign) NSInteger themeMode;
+
 @property(strong,nonatomic) SobotCacheEntity *sobotCacheEntity;
+
+
+-(void)addCacheEntity:(SobotCacheEntity *) entity;
+
+-(SobotCacheEntity *)getCacheEntity:(NSString *) bundleName;
 
 /**
  *  单例
@@ -25,8 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(SobotCache *) shareSobotCache;
 
 
-+(NSBundle *)getSourceBundle:(NSBundle *__nullable) placeholderBundle;
-+ (void)setSobotSourceBundle:(NSBundle *__nullable) bundle withName:(NSString * __nullable) bundleName;
++(NSBundle *)getSourceBundle:(NSBundle *__nullable) placeholderBundle withName:(NSString * __nullable) bundleName;
 
 
 +(BOOL)useImagesxcassets;

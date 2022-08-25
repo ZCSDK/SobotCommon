@@ -11,11 +11,7 @@
 
 @interface SobotCacheEntity : NSObject
 
-// SobotThemeMode,默认0
-//SobotThemeMode_Default    = 0, // 默认，跟随系统
-//SobotThemeMode_Dark       = 1, // 暗黑模式
-//SobotThemeMode_Light      = 2, // 亮色模式
-@property(nonatomic,assign) NSInteger themeMode;
+-(id)initWithBundleName:(NSString *) bundleName;
 
 // 资源bundle名称，比如SobotOnline.bundle则 bundleName = SobotOnline
 @property(nonatomic,strong) NSString *bundleName;
@@ -29,6 +25,9 @@
 // 资源bundle中，语言文件名称
 @property(nonatomic,strong) NSString *colorTableName;
 
+
+// 无法识别时的默认语言
+@property(nonatomic,strong) NSString *defaultlanguage;
 
 // 指定语言
 @property(nonatomic,strong) NSString *absoluetelanguage;

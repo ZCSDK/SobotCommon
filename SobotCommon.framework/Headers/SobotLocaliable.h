@@ -48,6 +48,8 @@ FOUNDATION_EXPORT NSString * const SobotLocaliablePathInBundle;
 +(NSString *)sobotGetDefaultString:(NSString *) key;
 +(NSString *)sobotGetDefaultString:(NSString *)key lan:(NSString *) absoluteLanguage;
 
+// 多个模块，请单独使用此方法
++(NSString *)sobotGetDefaultString:(NSString *)key bundleName:(NSString *)bundleName table:(NSString *) tableName path:(NSString *) pathInBundle lan:(NSString *)defaultLanguage absoluteLan:(NSString *) absoluteLanguage;
 @end
 
 NS_ASSUME_NONNULL_END

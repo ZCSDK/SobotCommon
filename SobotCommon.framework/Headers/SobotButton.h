@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 // 边框颜色key
 @property(nonatomic,strong) NSString *borderColorName;
 
+@property(nonatomic,strong) NSString *bundleName;
+
 
 -(void) addTapHandle:(void(^)(SobotButton *btnObj)) clickBlock;
 

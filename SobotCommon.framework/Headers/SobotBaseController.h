@@ -38,6 +38,7 @@ typedef NS_ENUM(NSInteger,SobotButtonClick) {
 
 @interface SobotBaseController : UIViewController
 
+@property(nonatomic,strong) NSString *bundleName;
 /**
  *  顶部的View
  */

@@ -13,19 +13,19 @@
 @class SobotXHImageViewer;
 
 /**
- *  WillDismissWithSelectedViewBlock
+ *  sobotHxWillDismissWithSelectedViewBlock
  */
-typedef void (^WillDismissWithSelectedViewBlock)(SobotXHImageViewer *imageViewer, UIImageView *selectedView);
+typedef void (^sobotHxWillDismissWithSelectedViewBlock)(SobotXHImageViewer *imageViewer, UIImageView *selectedView);
 
 /**
- *  DidDismissWithSelectedViewBlock
+ *  sobotHxDidDismissWithSelectedViewBlock
  */
-typedef void (^DidDismissWithSelectedViewBlock)(SobotXHImageViewer *imageViewer, UIImageView *selectedView);
+typedef void (^sobotHxDidDismissWithSelectedViewBlock)(SobotXHImageViewer *imageViewer, UIImageView *selectedView);
 
 /**
- *  DidChangeToImageViewBlock
+ *  sobotHxDidChangeToImageViewBlock
  */
-typedef void (^DidChangeToImageViewBlock)(SobotXHImageViewer *imageViewer, UIImageView *selectedView);
+typedef void (^sobotHxDidChangeToImageViewBlock)(SobotXHImageViewer *imageViewer, UIImageView *selectedView);
 
 @protocol SobotXHImageViewerDelegate <NSObject>
 
@@ -56,9 +56,9 @@ typedef void (^DidChangeToImageViewBlock)(SobotXHImageViewer *imageViewer, UIIma
 
 - (void)tappedScrollView:(UITapGestureRecognizer *)sender;
 
-- (id)initWithImageViewerWillDismissWithSelectedViewBlock:(WillDismissWithSelectedViewBlock)willDismissWithSelectedViewBlock
-                          didDismissWithSelectedViewBlock:(DidDismissWithSelectedViewBlock)didDismissWithSelectedViewBlock
-                                didChangeToImageViewBlock:(DidChangeToImageViewBlock)didChangeToImageViewBlock;
+- (id)initWithImageViewersobotHxWillDismissWithSelectedViewBlock:(sobotHxWillDismissWithSelectedViewBlock)sobotHxWillDismissWithSelectedViewBlock
+                          sobotHxDidDismissWithSelectedViewBlock:(sobotHxDidDismissWithSelectedViewBlock)sobotHxDidDismissWithSelectedViewBlock
+                                sobotHxDidChangeToImageViewBlock:(sobotHxDidChangeToImageViewBlock)sobotHxDidChangeToImageViewBlock;
 
 - (void)dismissWithAnimate;
 - (void)dismissWithAnimate:(CGFloat) animate;

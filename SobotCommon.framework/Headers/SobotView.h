@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SobotView : UIButton
 
 @property(nonatomic,strong) NSString *borderColorName;
+@property(nonatomic,strong) NSString *bundleName;
 
 @end
 
