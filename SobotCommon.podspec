@@ -29,5 +29,5 @@ Pod::Spec.new do |s|
 
   s.ios.vendored_frameworks = 'SobotCommon.framework'
 
-
+  s.resources = 'SobotCommon.bundle'
 end
