@@ -9,26 +9,30 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger,SoobtImagePickerFileType) {
-    SoobtImagePickerFileTypeImage = 0,
-    SoobtImagePickerFileTypeVideo = 1
+typedef NS_ENUM(NSInteger,SobotImagePickerFileType) {
+    SobotImagePickerFileTypeImage = 0,
+    SobotImagePickerFileTypeVideo = 1
 };
 
-typedef NS_ENUM(NSInteger,SoobtImagePickerType) {
-    SoobtImagePickerPicture = 0, // 相册
-    SoobtImagePickerCamera  = 1  // 相机
+typedef NS_ENUM(NSInteger,SobotImagePickerType) {
+    SobotImagePickerPicture = 0, // 相册
+    SobotImagePickerCamera  = 1,  // 相机
+    SobotImagePickerVideo   = 2  //从相册选择视频
 };
 
 
 /**
  *  DidFinishPickingMediaBlock
  */
-typedef void(^DidFinishPickingMediaBlock)(NSString  * _Nullable filePath , SoobtImagePickerFileType type, NSDictionary * _Nullable duration);
+typedef void(^DidFinishPickingMediaBlock)(NSString  * _Nullable filePath , SobotImagePickerFileType type, NSDictionary * _Nullable duration);
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SobotImagePickerTools : NSObject
+
+/** 系统相册相机图片 */
+@property (nonatomic,strong) UIImagePickerController *zc_imagepicker;
 
 +(SobotImagePickerTools *) shareImagePickerTools;
 
@@ -40,7 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param finshBlock    处理结果
  *
  */
--(void)getPhotoByType:(SoobtImagePickerType) type onlyPhoto:(BOOL) onlyPicture  byUIImagePickerController:(UIViewController *)by_controller block:(nonnull DidFinishPickingMediaBlock)finshBlock;
+-(void)getPhotoByType:(SobotImagePickerType) type onlyPhoto:(BOOL) onlyPicture  byUIImagePickerController:(UIViewController *)by_controller block:(nonnull DidFinishPickingMediaBlock)finshBlock;
+-(void)getPhotoByType:(SobotImagePickerType) type onlyPhoto:(BOOL) onlyPicture  byUIImagePickerController:(UIViewController *)by_controller start:(void(^)(UIImagePickerController *vc)) pickerBlock block:(nonnull DidFinishPickingMediaBlock)finshBlock;
 
 @end
 

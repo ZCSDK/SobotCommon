@@ -9,6 +9,9 @@
 #import <SobotUI/SobotButton.h>
 #import <SobotUI/SobotBaseController.h>
 #import <SobotUI/SobotFontColor.h>
+#import <SobotUI/SobotBaseEntity.h>
+#import <SobotUI/SobotCache.h>
+#import <SobotUI/SobotHtmlCore.h>
 
 //! Project version number for SobotUI.
 FOUNDATION_EXPORT double SobotUIVersionNumber;

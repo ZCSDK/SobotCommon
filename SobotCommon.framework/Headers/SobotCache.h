@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <SobotCommon/SobotCacheEntity.h>
+#import "SobotCacheEntity.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

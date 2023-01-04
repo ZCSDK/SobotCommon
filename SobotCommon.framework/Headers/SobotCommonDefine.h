@@ -8,15 +8,27 @@
 #import <UIKit/UIKit.h>
 #import "SobotUITools.h"
 #import "SobotFontColor.h"
+#import "SobotLayoutTools.h"
 
-//#import "SobotExtenalHeader.h"
-
-// 正式使用，需要用以代码替换SobotExtenalHeader.h的内容
 #import "SobotUtils.h"
 #import "SobotLocaliable.h"
+#import "SobotDateTimes.h"
+#import "SobotLog.h"
+#import "SobotNetwork.h"
+
+//#import <SobotCommon/SobotUtils.h>
+//#import <SobotCommon/SobotLocaliable.h>
+//#import <SobotCommon/SobotDateTimes.h>
+//#import <SobotCommon/SobotLog.h>
+//#import <SobotCommon/SobotNetwork.h>
+
+// 正式使用，需要用以代码替换SobotExtenalHeader.h的内容
+//#import "SobotUtils.h"
+//#import "SobotLocaliable.h"
 
 //#import <SobotUtils_private/SobotUtils.h>
 //#import <SobotUtils_private/SobotLocaliable.h>
+//// 多语言支持
 #define SobotLocalString(key) [[SobotLocaliable shareSobotLocaliable] sobotGetLocalString:key]
 
 #ifndef SobotCommonDefine_h

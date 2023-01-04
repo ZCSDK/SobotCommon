@@ -34,6 +34,8 @@ typedef NS_ENUM(NSInteger,SobotButtonClick) {
     SobotButtonClickDelImg,//删除图片
     SobotButtonClickReply,// 回复工单
     SobotButtonClickActivate,//激活工单
+    SobotButtonClickEvaluate,// 评价
+    SobotButtonClickTEL,// 电话
 };
 
 @interface SobotBaseController : UIViewController
@@ -42,25 +44,30 @@ typedef NS_ENUM(NSInteger,SobotButtonClick) {
 /**
  *  顶部的View
  */
-@property(nonatomic,strong) UIView      * topView;
+@property(nonatomic,strong) UIView *topView;
+
+// 顶部view 内容视图
+@property(nonatomic,strong) UIView *topContentView;
 
 /**
  *  关闭按钮（返回）
  */
-@property(nonatomic,strong) UIButton    * backButton;
+@property(nonatomic,strong) UIButton *backButton;
 
 /**
   更多按钮，SobotButtonClickRight
  */
-@property(nonatomic,strong) UIButton    * moreButton;
+@property(nonatomic,strong) UIButton *moreButton;
 
 /**
  *  标题
  */
-@property(nonatomic,strong) UILabel    * titleLabel;
+@property(nonatomic,strong) UILabel *titleLabel;
 
 @property(nonatomic,strong) NSString *backTitle;
 
+// 是否使用自定义导航栏 不使用系统导航栏
+@property(nonatomic,assign) BOOL navcBarHidden;
 /**
  *
  *  导航条底部线条
@@ -69,11 +76,16 @@ typedef NS_ENUM(NSInteger,SobotButtonClick) {
 @property (nonatomic,strong) UIView * bottomLine;
 
 
-@property (nonatomic,assign) CGFloat contentY;
-@property (nonatomic,assign) CGFloat contentHeight;
-@property (nonatomic,assign) BOOL isAppear;
+// 约束相关
+@property(nonatomic,strong)NSLayoutConstraint *topViewEH;
+@property(nonatomic,strong) NSLayoutConstraint *titleViewEW;
+@property(nonatomic,strong)NSLayoutConstraint *titleViewEH;
+@property(nonatomic,strong)NSLayoutConstraint *topViewPL;
+@property(nonatomic,strong)NSLayoutConstraint *topViewPR;
 
-
+@property(nonatomic,strong)NSLayoutConstraint *topContentViewPL;
+@property(nonatomic,strong)NSLayoutConstraint *topContentViewPR;
+@property(nonatomic,strong)NSLayoutConstraint *topContentViewEH;
 -(void)goBack;
 
 -(void)buttonClick:(UIButton *) sender;
@@ -90,19 +102,46 @@ typedef NS_ENUM(NSInteger,SobotButtonClick) {
 // key=@(tag) value = @{title,img,imgsel}
 @property(nonatomic,strong)NSDictionary *navItemsSource;
 // 创建导航头
+// 当self.navigationController && !self.navigationController.navigationBarHidden时，会自动调用createCustomTitleView
 -(void)createVCTitleView;
+/// 仅创建自定义导航栏， 后期不再使用，直接使用createVCTitleView
 -(void)createCustomTitleView;
+
+
+// 仅设置自定义导航，1.0.2之后废弃
 -(void)setNavigationBarLeft:(NSArray *__nullable)leftTags right:(NSArray *__nullable)rightTags;
+
+/// 仅设置左右按钮
+/// @param leftTags 左边
+/// @param rightTags 右边
+-(void)updateBannerLeftTags:(NSArray *__nullable)leftTags rightTags:(NSArray *__nullable)rightTags;
+
+
+/// 设置顶部导航栏或者自定义View 左右按钮的数据 以及titleView的数据 、title数据
+/// @param leftTags 左边按钮的数据
+/// @param rightTags 右边按钮的数据
+/// @param titleView titleview  自定义view 默认空
+-(void)setLeftTags:(NSArray *__nullable)leftTags rightTags:(NSArray *__nullable)rightTags titleView:(UIView * __nullable)titleView ;
+-(void)updateBannerLeftTags:(NSArray *__nullable)leftTags rightTags:(NSArray *__nullable)rightTags titleView:(UIView * __nullable)titleView;
+
+
+
+/// 设置标题 （系统导航、自定义view）
+/// @param titleName 标题昵称
+-(void)setTitleName:(NSString *__nullable)titleName;
 -(void)setNavTitle:(NSString *) title;
+
+
+/// 设置导航颜色
+/// - Parameter color: 导航颜色
 -(void)setTopBackgroudColor:(UIColor *) color;
--(void)createTitleViewWithLeft:(NSArray *__nullable)leftTags right:(NSArray *__nullable)rightTags;
+
 
 // 获取nav上的button
 -(UIButton *)getNavButtonWithTag:(NSInteger )tag;
 
 // 获取页面内容的起始坐标
 -(CGFloat )getVCContentY;
-
 
 
 -(void)createPlaceHolderView:(UIView *) superView title:(NSString *) title desc:(NSString *__nullable )message image:(UIImage *__nullable )  tipImage block:(void(^__nullable)(UIButton *_Nonnull btn,NSInteger tag))  refreshClick;

@@ -44,4 +44,6 @@
 /// @param image 图片资源
 +(UIImage *) decode:(UIImage *)image;
 
+
+
 @end

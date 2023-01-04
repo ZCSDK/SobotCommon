@@ -50,6 +50,11 @@ FOUNDATION_EXPORT NSString * const SobotLocaliablePathInBundle;
 
 // 多个模块，请单独使用此方法
 +(NSString *)sobotGetDefaultString:(NSString *)key bundleName:(NSString *)bundleName table:(NSString *) tableName path:(NSString *) pathInBundle lan:(NSString *)defaultLanguage absoluteLan:(NSString *) absoluteLanguage;
+
+/**
+ *   获取当前的手机语言
+ */
++(NSString *)sobotGetCurrentLanguages;
 @end
 
 NS_ASSUME_NONNULL_END

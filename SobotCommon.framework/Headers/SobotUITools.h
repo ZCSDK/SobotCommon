@@ -47,10 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 +(UIColor *)getSobotThemeModeColor:(NSString *)hexColorKey alpha:(CGFloat) alpha bundleName:(NSString *)bundleName;
 
 
-/// 根据SobotTypeColor 获取hexKey
-/// @param key <#key description#>
-+(NSString *)getThemeModeHexColorKeyBySobotTypeColor:(NSString *) key;
-
 /// 获取
 /// @param hexColor  直接设置如#FFFFFF颜色值
 /// @param alpha  指定透明度

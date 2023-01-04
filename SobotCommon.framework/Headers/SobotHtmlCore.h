@@ -35,6 +35,12 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)filterHTMLTag:(NSString *)str;
 +(NSString *)removeAllHTMLTag:(NSString *)html;
 
+
+
+/// 提取URL信息
+/// @param url  url
+/// @param filterBlock 结果
++(void)websiteFilter:(NSString *)url result:(void (^)(NSString * _Nonnull url, NSString * _Nonnull icon, NSString * _Nonnull title, NSString * _Nonnull desc, NSDictionary * _Nullable obj))filterBlock;
 @end
 
 NS_ASSUME_NONNULL_END

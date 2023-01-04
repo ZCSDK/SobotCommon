@@ -25,6 +25,10 @@ NSString *sobotGetCommonVersion(void);
 NSString *sobotConvertToString(id object);
 
 
+/// nsdata转字符串
+/// @param object nsdata数据集
+NSString *sobotConvertDataToString(NSData *object);
+
 /// int 转字符串
 /// @param number num
 NSString *sobotConvertIntToString(int number);
@@ -46,6 +50,13 @@ NSString *sobotSHA256(NSString *inputString);
 /// 格式化url
 /// @param url  字符串
 NSString *sobotUrlEncodedString(NSString *url);
+NSString *sobotUrlDecodedString(NSString *url);
+
+
+/// 判断是否为URL
+/// @param urlString url
+/// @param regexStr 自定义正则
+BOOL sobotIsUrl(NSString *urlString,NSString *regexStr);
 
 // 号码隐藏 0.不隐藏 1.中间隐藏 2.末尾隐藏  电销任务数据号码是否隐藏
 NSString * sobotNumberSuitScanf(NSString*number,int scanfType);
@@ -69,7 +80,9 @@ BOOL sobotValiddatePinYin(NSString *pinYin);
 /// 纯数字
 BOOL sobotValidateNumber(NSString *str);
 
+NSString *sobotValidURLString(NSString *urlString);
 
+BOOL sobotIsUrl(NSString *urlString,NSString *regexStr);
 /**
  判断是否是为浮点数
  @param str 字符串
@@ -78,7 +91,7 @@ BOOL sobotValidateNumber(NSString *str);
 BOOL sobotValidateFloat(NSString *str);
 BOOL sobotValidateFloatWithNum(NSString *str,int num);
 
-
+BOOL sobotValidateRuleNotBlank(NSString *str);
 
 /**
  *  判断空对象、字符串、长度为0
