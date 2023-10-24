@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
  
 
   s.name         = "SobotCommon"
-  s.version      = "2.0.1"
+  s.version      = "2.1.0"
   s.summary      = "SobotCommon framework"
 
 
@@ -25,7 +25,8 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 armv7 arm64' }
+# 注意新包去掉了 armv7
+  s.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 arm64' }
 
   s.ios.vendored_frameworks = 'SobotCommon.framework'
 

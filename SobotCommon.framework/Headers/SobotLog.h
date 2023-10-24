@@ -18,12 +18,14 @@
 #define SobotLogHeader [NSString stringWithFormat:@"\n========SobotLog========\n%@ %@\n%s[%d]",[[NSBundle mainBundle] bundleIdentifier],[NSDate date],__FUNCTION__,__LINE__]
 
 typedef NS_ENUM(NSInteger,SobotLogType) {
-    SobotLogTypeInfo        = 0,
-    SobotLogTypeUnknow,     // 写入
-    SobotLogTypeError,      // 写入
-    SobotLogTypeException,  // 写入
-    SobotLogTypeDebug,      // 写入
-    SobotLogTypeMessage    // 写入
+    SobotLogTypeUnknow = 0,     // 写入
+    SobotLogTypeError = 1,      // 写入
+    SobotLogTypeException = 2,  // 写入
+    SobotLogTypeInfo = 3,
+    SobotLogTypeStartSDK = 4,
+    SobotLogTypeStartApp = 5,
+    SobotLogTypeDebug = 6,      // 写入
+    SobotLogTypeMessage = 7,   // 写入
 };
 
 @interface SobotLog : NSObject
