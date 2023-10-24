@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
 # 注意新包去掉了 armv7
-  s.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 arm64' }
+  s.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 armv7 arm64' }
 
   s.ios.vendored_frameworks = 'SobotCommon.framework'
 
