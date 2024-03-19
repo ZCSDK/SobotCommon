@@ -42,7 +42,8 @@ FOUNDATION_EXPORT NSString * const SobotLocaliablePathInBundle;
 
 // 指定属性有效
 -(NSString * )sobotGetLocalString:(NSString *)key;
-
+// 获取bundleName中的国际化字段
+-(NSString * )sobotGetLocalString:(NSString *)key bundleName:(NSString *)bundleName;
 
 // 使用默认值直接访问，指定属性无效
 +(NSString *)sobotGetDefaultString:(NSString *) key;

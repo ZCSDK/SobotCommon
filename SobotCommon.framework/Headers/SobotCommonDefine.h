@@ -29,7 +29,10 @@
 //#import <SobotUtils_private/SobotUtils.h>
 //#import <SobotUtils_private/SobotLocaliable.h>
 //// 多语言支持
-#define SobotLocalString(key) [[SobotLocaliable shareSobotLocaliable] sobotGetLocalString:key]
+//#define SobotLocalString(key) [[SobotLocaliable shareSobotLocaliable] sobotGetLocalString:key]
+#define SobotLocalString(key) [[SobotLocaliable shareSobotLocaliable] sobotGetLocalString:key bundleName:@"SobotCommon"]
+// 资源
+#define SobotGetImage(imageName) [SobotUITools getSysImageByName:imageName]
 
 #ifndef SobotCommonDefine_h
 #define SobotCommonDefine_h

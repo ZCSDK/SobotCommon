@@ -35,3 +35,11 @@
 "没有更多数据了"="No more data";
 "下拉可以刷新"="Drop-down can be refreshed";
 
+
+"添加到附件"="Add to attachment";
+"选择照片"="Select photos";
+"已选 %@ 个"="Selected %@ items";
+"最多可选择 %ld 张照片"="Up to %ld photos can be selected";
+
+"预览" = "Preview";
+"不能上传50M以上的文件" = "Cannot upload files larger than 50MB";

@@ -17,8 +17,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 NSString *sobotGetCurrentTimes(void);
 
+/**
+ 获取当前日期的字符串
+ */
+NSString *sobotGetCurrentDate(NSString *formate);
+
+/**
+ 格式化字符串日期，如2023-11-10 10:10:10 格式化为2023-11-10 10:10
+ */
+NSString *sobotFormateDateString(NSString *formate,NSString *dateString);
+
 // 几天之后
 NSString *sobotBackToPassedTimeWithDaysNumber(NSInteger number,NSString *serverLocale,NSTimeZone *timeZone,NSInteger time);
+
+NSString *sobotBackToPassedTimeWithDaysNumberNoTimeZone(NSInteger number);
 
 /**
  *  日期格式

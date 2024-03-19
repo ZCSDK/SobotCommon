@@ -71,6 +71,12 @@ typedef NS_ENUM(NSInteger,SobotLogType) {
  @param logType 日志类型
  */
 +(void)cacheLog:(NSString *) title content:(NSString *)message logType:(SobotLogType) logType;
+
+/// 不添加格式，直接写入message
+/// @param message 日志
+/// @param logType 日志类型，根据类型判断存储位置
++(void)addMessageToCache:(NSString *) message type:(SobotLogType )logType;
+
 /**
  *  根据设定的过期时长，清理日志，默认是1天
  */

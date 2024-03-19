@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - resultBlock: 结果
 ///   --包含登录客服的所有属性，不包含accessToken
 ///   -- 用户信息，新旧权限信息
--(void)doAppLogin:(NSString *  _Nullable)loginAcount pwd:(NSString *  _Nullable)loginPwd appVersin:(NSString *)version status:(int) loginStatue result:(void (^)(NSInteger code, NSDictionary * _Nullable, NSString * _Nullable))resultBlock;
+-(void)doAppLogin:(NSString *  _Nullable)loginAcount pwd:(NSString *  _Nullable)loginPwd appVersin:(NSString *)version status:(int) loginStatue appRegion:(int)appRegion result:(void (^)(NSInteger code, NSDictionary * _Nullable, NSString * _Nullable))resultBlock;
 
 /// 登录
 /// - Parameters:
