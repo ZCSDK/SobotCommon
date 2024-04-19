@@ -22,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic,strong) UIColor *placeholderColor;
 
-
 @property (nonatomic,assign) CGFloat labX;
 @end
 

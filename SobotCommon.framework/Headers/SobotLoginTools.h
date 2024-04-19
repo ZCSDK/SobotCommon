@@ -13,6 +13,18 @@
 #define KVAppLoginDict @"SobotAppLoginInfo"
 NS_ASSUME_NONNULL_BEGIN
 
+// 主要是登录APP或在线SDK时使用
+@interface SobotLoginParams:SobotBaseEntity
+
+@property(nonatomic,strong) NSString *loginEmail;
+@property(nonatomic,strong) NSString *loginPwd;
+
+@property(nonatomic,assign) int loginStatus;
+@property(nonatomic,assign) int appRegion;
+@property(nonatomic,strong) NSString *appVersion;
+
+@end
+
 /// 登录
 @interface SobotLoginTools : NSObject
 
@@ -68,10 +80,29 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameters:
 ///   - loginAcount: 账号
 ///   - loginPwd: 如果当前已经登录，不要传此参数
-///   - token: 如果此参数不为空，并且loginPwd为空，会默认登录成功，直接获取用户信息
+///   - appParams: 如果是APP登录，需要配置APP相关参数
 ///   - resultBlock: 登录结果，包含token和用户信息，不包含accessToken
--(void)doLogin:(NSString *  _Nullable)loginAcount pwd:(NSString *  _Nullable)loginPwd token:(NSString *  _Nullable)token result:(void (^)(NSInteger code, NSDictionary * _Nullable, NSString * _Nullable))resultBlock;
+-(void)doLogin:(NSString *  _Nullable)loginAcount pwd:(NSString *  _Nullable)loginPwd appParams:(SobotLoginParams *  _Nullable)inParams result:(void (^)(NSInteger code, NSDictionary * _Nullable, NSString * _Nullable))resultBlock;
 
+
+
+/// 使用公司appkey登录
+/// - Parameters:
+///   - app_key: key
+///   - appid: id
+///   - email: 坐席账号
+///   - appParams: 如果是APP登录，需要配置APP相关参数
+///   - resultBlock: 登录结果
+-(void)loginWithAppkey:(NSString *)app_key appid:(NSString *) appid email:(NSString *) email appParams:(SobotLoginParams * _Nullable) appParams result:(void (^)(NSInteger code, NSDictionary * _Nullable, NSString * _Nullable))resultBlock;
+
+
+/// 使用公司token登录
+/// - Parameters:
+///   - companyToken: 公司token
+///   - email: 当前坐席的账号
+///   - appParams: 如果是APP登录，需要配置APP相关参数
+///   - resultBlock: 登录结果
+-(void)loginWithCompanyToken:(NSString *)companyToken email:(NSString *) email  appParams:(SobotLoginParams * _Nullable) appParams result:(void (^)(NSInteger code, NSDictionary * _Nullable, NSString * _Nullable))resultBlock;
 
 /// 获取登录信息
 /// - Parameter resultBlock: 如果判断当前支持V6，会自动获取accessToken

@@ -123,6 +123,8 @@ static SobotTypeColor const SobotTextCallStatus3 = @"SobotTextCallStatus3"; // �
 static SobotTypeColor const SobotTextCallStatus4 = @"SobotTextCallStatus4"; // 呼叫状态文字颜色
 static SobotTypeColor const SobotTextCallStatus5 = @"SobotTextCallStatus5"; // 拨号页面不可点颜色
 
+static SobotTypeColor const SobotColorTest = @"SobotColorTest"; // 测试颜色
+
 // 颜色
 #define UIColorFromModeColor(themeColorKey) [SobotUITools getSobotThemeModeColor:themeColorKey  bundleName:@""]
 #define UIColorFromModeColorAlpha(themeColorKey,a) [SobotUITools getSobotThemeModeColor:themeColorKey alpha:a  bundleName:@""]

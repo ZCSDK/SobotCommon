@@ -1,6 +1,10 @@
 # SobotCommon
 SobotCommon.framework
 
+
+## 2.2.10 [2024-04-19]
+1.[新增]座席token登录方式
+
 ## 2.1.1 [2024-03-19]
 1.[新增]图片多选控件
 

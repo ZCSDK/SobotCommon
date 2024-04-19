@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger,SobotMessageType) {
     SobotMessageTypeTipsText  = -1, //这是一条提示语
     SobotMessageTypeStartSound = -4,//正在录音
     SobotMessageTypeCancelSound = -5,//取消正在闪烁的语音cell
+    SobotMessageTypeRobotRealuate = 25,// 机器人点踩 标签 原因  显示的cell  25 是系统消息，当前历史记录接口过滤 只显示机器人点踩的配置数据
 };
 
 typedef NS_ENUM(NSInteger,SobotMessageRichJsonType) {
@@ -122,6 +123,8 @@ typedef NS_ENUM(NSInteger,SobotMessageActionType) {
     // 点击 自定义卡片的确认按钮 显示menuTip提示消息
     SobotMessageActionTypeCardMenuTip                      = 31,
     
+    /***** 多轮节点转人工 提示文案   ****/
+    SobotMessageActionTypeloopTurnTipMsg                    = 32,
     /**
          * 用户咨询页授权
          */
@@ -155,6 +158,11 @@ typedef NS_ENUM(NSInteger,SobotMessageActionType) {
     /**先添加一条提示消息 （显示成该消息由机器人发送）“对不起未能解决您的问题，正在为您转接人工客服”**/
     SobotMessageActionTypeTransferTips = 50,
     
+    /**
+     *  当前是机器人 点踩标签 系统消息
+     */
+    SobotMessageActionTypeRobotTip = 51,
+    
     /****** 发送留言转离线消息后，结束会话 *****/
     SobotMessageActionTypeChatCloseByLeaveMsg               = 99,
     /**
@@ -167,9 +175,13 @@ typedef NS_ENUM(NSInteger,SobotMessageActionType) {
      */
     SobotMessageActionTypeChat_WaitingContinueTips = 101,
     SobotMessageActionTypeChat_WaitingContinueMsg = 102,
+    
+   
 };
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ZCChatRealuateConfigInfo ;
 
 /**
  通用卡片按钮信息
@@ -239,6 +251,11 @@ NS_ASSUME_NONNULL_BEGIN
     */
 @property(nonatomic,copy) NSString *customCardId;
 
+/**
+ *    机器人标准问题   发送给机器人时需要传入
+ */
+@property(nonatomic,copy) NSString *customCardQuestion;
+
    /**
     * 定制卡片名称: 包括 订单的标题、商品的名称
     */
@@ -299,6 +316,10 @@ NS_ASSUME_NONNULL_BEGIN
  卡片唯一id，自定义发送时，必须设置唯一，否则会重复发生
  */
 @property(nonatomic,copy) NSString *cardId;
+
+
+// 0 系统身份发送 1 客户身份发送
+@property(nonatomic,assign) int isCustomerIdentity;
 
    /**
     * 卡片引导语
@@ -473,7 +494,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSMutableArray  * sugguestions;//": null,
 /**
  *  1 直接回答，2 理解回答，3 不能回答, 4引导回答，6互联网寒暄，
- *  7 私有寒暄（包括第三方天气、快递接口）,8百科, 9 向导回答,10 业务接口    // 151 152 153 待接口 多轮会话的类型,1525 多轮触发留言
+ *  7 私有寒暄（包括第三方天气、快递接口）,8百科, 9 向导回答,10 业务接口    // 151 152 153 待接口 多轮会话的类型,1525 多轮触发留言 1526多轮触发转人工
  */
 @property (nonatomic,assign) int answerType; //
 // 3.2.1添加，点踩、点赞回传给接口
@@ -528,7 +549,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *
- *  transferType  转人工类型，0-不转，1-重复提问转人工，2-情绪负向转人工  3、关键词转人工、4、多次命中转人工(显示转人工按钮，不主动转人工)，5:机器人自动转人工(新版拆分为6-9,activeTransfer此时为1) 6直接转人工，7理解转人工，8引导转人工，9未知转人工 10，点踩转人工
+ *  transferType  转人工类型，0-不转，1-重复提问转人工，2-情绪负向转人工  3、关键词转人工、4、多次命中转人工(显示转人工按钮，不主动转人工)，5:机器人自动转人工(新版拆分为6-9,activeTransfer此时为1) 6直接转人工，7理解转人工，8引导转人工，9未知转人工 10，点踩转人工 ,11多轮节点触发转人工
  **/
 @property (nonatomic,assign  ) int         transferType;//": 1,
 @property (nonatomic,assign  ) int         guideGroupFlag;//": null,
@@ -546,6 +567,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong  ) NSString         *ruleId;//": null,
 @property (nonatomic,strong  ) NSString         *kbId;//": "3",
 @property (nonatomic,strong  ) NSString         *kbName;//": "小智机器人-3"
+
+//************* 机器人多轮转人工 ***********
+// 转人工模式 0-按客户分配策略 1 -指定客服转 2 指定技能组转
+@property (nonatomic, copy) NSString *nodeTransferFlag;
+// 转人工目标ID 客服或者技能组ID
+@property (nonatomic, copy) NSString *transferTargetId;
+// 转人工结果 1-直接转人工 2 分组接待 3 无法转人工（忽略接口端预览参数）
+@property (nonatomic, assign) int transferResult;
+//************* 机器人多轮转人工end ***********
 
 @end
 
@@ -610,6 +640,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString *sensitiveWord;
 @property(nonatomic,strong) SobotChatContent *richModel;
 @property(nonatomic,strong) SobotChatRobotAnswerContent *robotAnswer;
+// 当前机器人 点踩标签 提示语
+@property(nonatomic,copy) NSString *robotTipMsg;
+// 当前机器人 点踩标签数据
+@property(nonatomic,strong) ZCChatRealuateConfigInfo *realuateConfigInfo;
+@property(nonatomic,copy) NSString *realuateConfigInfoJsonStr;
+
+// 215 的系统消息 并且  sysType = 5 头像要显示空白 不显示昵称
+@property(nonatomic,assign) BOOL isEmptyHeader;
 
 
 //-1未知、0-客服 1-客戸2-引用机器人
@@ -814,6 +852,10 @@ NS_ASSUME_NONNULL_BEGIN
 // 是否显示发送者信息
 @property (nonatomic , assign) BOOL isShowSenderFlag;
 
+// 点踩提交状态  提交状态 点踩是否提交 0-未标记 1-未提交 2-已提交
+@property(nonatomic,copy) NSString *submitStatus;
+
+
 //========================= 这些字段为了记录重新发送时 调用发送接口传入的之前传入的参数 start =========================
 // 消息内容，文件地址等
 @property (nonatomic,strong) NSString *content;
@@ -870,6 +912,37 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+// 机器人点踩数据 扩展model
+@interface ZCChatRealuateConfigInfo : NSObject
+
+@property(nonatomic,copy) NSString *infoId ;
+@property(nonatomic,copy) NSString *robotFlag;
+@property(nonatomic,copy) NSString *companyId;
+@property(nonatomic,copy) NSString *realuateAfterWord ;
+@property(nonatomic,copy) NSString *realuateEvaluateWord;
+@property(nonatomic,copy) NSString *realuateSubmitWord;
+@property(nonatomic,strong) NSMutableArray *chatRealuateTagInfoList;
+@property(nonatomic,assign) BOOL realuateInfoFlag;//是否开启点踩 标签
+-(id)initWithMyDict:(NSDictionary *)dict;
+@end
+
+@interface  ZCRealuateTagInfo: NSObject
+//"id": "1c1420914e364258ab2dc779cc537362",
+//            "realuateTag": "看不懂",
+//            "chatRealuateConfigId": "b8e39635261f40adb058f36b09033a13",
+//            "companyId": "66a522ea3ef944a98af45bac09220861",
+//            "createId": "6f1e50562a6d4a85bfd8b1924d5bb751",
+//            "createTime": 1712647756477,
+//            "updateId": "6f1e50562a6d4a85bfd8b1924d5bb751",
+//            "updateTime": 1712647756477
+@property(nonatomic,copy) NSString *tagId;
+@property(nonatomic,copy) NSString *realuateTag;
+@property(nonatomic,copy) NSString *chatRealuateConfigId;
+@property(nonatomic,copy) NSString *companyId;
+@property(nonatomic,assign) BOOL isSel;// 是否被选中
+-(id)initWithMyDict:(NSDictionary *)dict;
+
+@end
 
 
 NS_ASSUME_NONNULL_END

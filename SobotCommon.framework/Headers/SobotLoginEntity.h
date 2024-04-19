@@ -125,6 +125,11 @@ static SobotLoginModuleType _Nullable const SobotLoginModuleTypeOrder1230  = @"1
 static SobotLoginModuleType _Nullable const SobotLoginModuleType1611  = @"1611";  // 客户中心
 static SobotLoginModuleType _Nullable const SobotLoginModuleTypeOrder1231  = @"1231";  // 工单状态，可见与不可见
 
+
+static SobotLoginModuleType _Nullable const SobotLoginModuleTypeBlack  = @"220201";  // 工单状态，可见与不可见
+static SobotLoginModuleType _Nullable const SobotLoginModuleTypeTransfer  = @"220202";  // 工单状态，可见与不可见
+static SobotLoginModuleType _Nullable const SobotLoginModuleTypeDIY_ADMIN  = @"220204";  // 工单状态，可见与不可见
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SobotLoginEntity : SobotBaseEntity
@@ -141,24 +146,22 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign) int        callV6Flag;
 @property (nonatomic,assign) int        callV1Flag;
 
-// =1 使用新版服务总结，开通融合工作台
-@property (nonatomic,assign) int fuseWork;
 
 
-// 头像
-@property (nonatomic,strong) NSString * face;
+// 头像3.3.1使用faceImg替换
+//@property (nonatomic,strong) NSString * face;
 
-// 最大接待数量
-@property (nonatomic,assign) int        maxServiceCount;
+// 最大接待数量,3.3.1使用maxAccept替换
+//@property (nonatomic,assign) int        maxServiceCount;
+
+
 // 3.2.5修改，与maxServiceCount分开
 @property (nonatomic,assign) int        maxcount;
 
-// 用户状态，2忙碌、1在线,-1在线(有在线会话数据需要同步)  2.6.0新增 1-在线，2-忙碌 statusCode:3-小休，4-培训，5-会议，6-用餐，7-活动
-@property (nonatomic,assign) int        status;
 
 
-// 客服昵称
-@property (nonatomic,strong) NSString * nickName;
+//// 客服昵称,使用serviceNick
+//@property (nonatomic,strong) NSString * nickName;
 
 
 @property (nonatomic,strong) NSString * serviceId;
@@ -168,28 +171,9 @@ NS_ASSUME_NONNULL_BEGIN
 // APP 把token和tempId交换了值，本次修改回来
 @property (nonatomic,strong) NSString * token;
 
-// 工单tempId
-@property (nonatomic,strong) NSString * tempId;
 
-// 客服名称
-@property (nonatomic,strong) NSString * staffName;
-
-@property (nonatomic,strong) NSString * pid;
 @property (nonatomic,strong) NSString * companyId;
 
-// 用户aid
-@property (nonatomic,strong) NSString * aid;
-
-@property (nonatomic,strong) NSString * pu;
-@property (nonatomic,strong) NSString * puid;
-
-/**
- *  技能组ID
- */
-@property (nonatomic,strong) NSArray * groupId;
-
-// 技能组昵称
-@property (nonatomic,strong) NSArray * groupName;
 
 
 // 以下字符本地使用
@@ -209,46 +193,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString * cusRoleId;
 
 
-// 是否为工单账号
-@property (nonatomic,assign) int  imFlag;
 
-
-// 权限
-//1222        可删除工单
-//1223        可删除工单回复
-//1224        可关闭工单
-//1225        可激活工单
-//1030        工单历史记录显示
-@property (nonatomic,strong) NSDictionary * ticketFunction;
-
-
-
-@property (nonatomic,strong) NSString *wslink_default;
-@property (nonatomic,strong) NSArray  *wslink_bak;
 @property (nonatomic,strong) NSString *timezone; // "+08:00"
 @property (nonatomic,strong) NSString *timezoneId;// 时区 "Asia/Shanghai"
 
-// 是否有拉黑的权限  0无 1有
-@property (nonatomic,assign) int blackFunction;
 
-// 星标置顶 0不置顶 1置顶
-@property (nonatomic,assign) int topFlag ;
+// 是否为工单账号
+@property (nonatomic,assign) int  imFlag;
 
-// 会话排序 0 按接入顺序 1 按新消息时间
-@property (nonatomic,assign) int  sortFlag;
 
 // 标记是否显示会话顺序
 @property (nonatomic,assign) BOOL  sortTag;
 
 
-// 0默认值忙碌 3.小休 4.培训 5.会议 6.用餐 7.活动  (当前客服是在忙碌的状态下 子集的状态码)
-@property (nonatomic,assign) int  statusCode;
 
-// 当前客服账号是否有转接权限  0 没有  1 有
-@property (nonatomic,assign) int  transferFunction ;
 
-//转接审核开关 0关闭  1开启
-@property(nonatomic,assign) int transferAuditFlag;
 
 // 登录用户所属公司名称
 @property (nonatomic,copy) NSString *companyName;
@@ -294,7 +253,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,assign) int newServiceStatus;//": 1,
 @property(nonatomic,copy) NSString *orgRoleId;//": "",
-@property(nonatomic,copy) NSString *phoneNo;//": "18611622736",
 @property(nonatomic,strong) NSArray *products;//": ["0"],
 @property(nonatomic,copy) NSString *registerTime;//": 1609430400,
 @property(nonatomic,assign) int replyAuthFlag;//": 0,
@@ -327,9 +285,63 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property (nonatomic,assign) int region;
-@property(nonatomic,copy) NSString *kbVersion;//v1,v6
 
 @property (nonatomic,strong) NSDictionary * authMenu;
+
+
+/***********************************************
+ 以下是在线配置信息
+ ***/
+@property(nonatomic,copy) NSString *pu;//": "https://ws.sobot.com/webchat6/webchat",
+@property(nonatomic,copy) NSString *puid;//": "f786f380d5ea43499bfb78ca5053ffc9",
+//转接审核开关 0关闭  1开启
+@property(nonatomic,assign) int transferAuditFlag;
+// 客服名称,3.3.1使用serviceName
+//@property (nonatomic,strong) NSString * staffName;
+/**
+ *  技能组ID
+ */
+@property (nonatomic,strong) NSArray * groupId;
+
+// 技能组昵称
+@property (nonatomic,strong) NSArray * groupName;
+// 星标置顶 0不置顶 1置顶
+@property (nonatomic,assign) int topFlag ;
+// 会话排序 0 按接入顺序 1 按新消息时间
+@property (nonatomic,assign) int  sortFlag;
+
+@property(nonatomic,copy) NSString *phoneNo;//": "18611622736",
+
+@property(nonatomic,copy) NSString *robotVersion;//": "v1",
+@property(nonatomic,copy) NSString *onlineVersion;//": "v1",
+// 当前客服账号是否有转接权限  0 没有  1 有
+@property(nonatomic,assign) int transferFunction;//": 1,
+
+@property (nonatomic,strong) NSString *wslink_default;
+@property (nonatomic,strong) NSArray  *wslink_bak;
+
+// =1 使用新版服务总结，开通融合工作台
+@property (nonatomic,assign) int fuseWork;
+@property(nonatomic,copy) NSString *kbVersion;//": "v1",
+// 是否有拉黑的权限  0无 1有
+@property (nonatomic,assign) int blackFunction;
+
+// 在线接口使用
+@property(nonatomic,copy) NSString *tempId;// 在线产品接口使用
+// 用户状态，2忙碌、1在线,-1在线(有在线会话数据需要同步)  2.6.0新增 1-在线，2-忙碌 statusCode:3-小休，4-培训，5-会议，6-用餐，7-活动
+@property (nonatomic,assign) int        status;
+// 0默认值忙碌 3.小休 4.培训 5.会议 6.用餐 7.活动  (当前客服是在忙碌的状态下 子集的状态码)
+@property (nonatomic,assign) int  statusCode;
+
+// 权限，此属性目前未使用，已从functionStr数组中获取
+//1222        可删除工单
+//1223        可删除工单回复
+//1224        可关闭工单
+//1225        可激活工单
+//1030        工单历史记录显示
+@property (nonatomic,strong) NSDictionary * ticketFunction;
+
+
 
 // key : SOBOT_LOGIN_MODULE_KEY_
 -(BOOL)checkModule:(NSString *) key;
@@ -339,13 +351,9 @@ NS_ASSUME_NONNULL_BEGIN
 -(BOOL)checkModuleV6:(NSString *)key;
 
 
-// 登录接口，调用此方法
--(id)initWithLoginDict:(NSDictionary *)dict;
-
 // 查询坐席信息，使用此接口
 -(id)initWithMyDict:(NSDictionary *)dict;
 
 @end
-
 
 NS_ASSUME_NONNULL_END
