@@ -163,6 +163,12 @@ typedef NS_ENUM(NSInteger,SobotMessageActionType) {
      */
     SobotMessageActionTypeRobotTip = 51,
     
+// 切换语言
+   SobotMessageActionTypeLanguage = 52,
+   // 切换语言提示语
+   SobotMessageActionTypeSelLanguage = 53,
+
+    
     /****** 发送留言转离线消息后，结束会话 *****/
     SobotMessageActionTypeChatCloseByLeaveMsg               = 99,
     /**
@@ -529,11 +535,15 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  queueFlag  排队方式标记  只在关键字转人工的时候传给服务端，其他情况传空
  *  1:展示排队或者客服不在线提示，为0不展示(如果转人工失败显示机器人回复，如果成功，不显示机器人回复)
- *
- **/
+ *  排队标识 1-触发排队，0-不触发排队
+*/
 @property (nonatomic,assign)  int queueFlag;
 
-// 1-客服在线可以转入，0-客服忙碌或不在线，不能转入
+/**
+ onlineFlag:1 表示有客服在线可接入（展示提示语，不展示机器人回复，触发转人工逻辑）
+ onlineFlag:2 表示需要弹出分组接待（不展示提示语，不展示机器人回复，触发转人工逻辑）
+ onlineFlag:3 表示无客服在线 （不执行转人工，展示机器人回复）
+ */
 @property (nonatomic,assign) int  onlineFlag;
 
 // 转人工提示语
@@ -546,6 +556,36 @@ NS_ASSUME_NONNULL_BEGIN
  *
  **/
 @property (nonatomic,assign) int  transferFlag;
+
+
+
+/**4.1.8版本新增语义转人工
+ 新增
+ *semanticsKeyWordVo 对象，与keywordVo处理一样。
+ *transferResult，对应onlineFlag
+ onlineFlag:1 表示有客服在线可接入（展示提示语，不展示机器人回复，触发转人工逻辑）
+ onlineFlag:2 表示需要弹出分组接待（不展示提示语，不展示机器人回复，触发转人工逻辑）
+ onlineFlag:3 表示无客服在线 （不执行转人工，展示机器人回复）
+ groups对应：groupList
+ 新增：
+  * 语义id
+ private String semanticsKeyWordId;
+  * 语义名称
+ private String semanticsKeyWordName;
+  * 问法id
+ private String semanticsKeyWordQuestionId;
+  * 问法
+ private String semanticsKeyWordQuestion;
+ **/
+// 语义转人工
+@property (nonatomic,strong  ) NSDictionary     *semanticsKeyWordVo;
+@property (nonatomic,strong) NSString  *semanticsKeyWordId;
+@property (nonatomic,strong) NSString  *semanticsKeyWordName;
+@property (nonatomic,strong) NSString  *semanticsKeyWordQuestionId;
+@property (nonatomic,strong) NSString  *semanticsKeyWordQuestion;
+
+
+
 
 /**
  *
@@ -634,6 +674,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SobotChatMessage : SobotBaseEntity
 
+// 是一问多答的消息 和人工客服回复的新消息 是否要加锁
+@property(nonatomic,assign) BOOL isLockMsg;
+
+// 是否是一问多答的消息
+@property(nonatomic,assign) BOOL isAnswersMsg;
+// 是否是一问多答的最后一条消息
+@property(nonatomic,assign) BOOL isLastAnswersMsg;
+// 是否是一问多答的第一条消息
+@property(nonatomic,assign) BOOL isFisrtAnswersMsg;
+// 一问多答 最后问题的消息ID
+@property(nonatomic,copy) NSString *qustionMsgId;
+// 记录一问多答的条数
+@property(nonatomic,assign) int answersCount;
+
 // 消息类型
 @property(nonatomic,assign) SobotMessageType msgType;
 
@@ -670,6 +724,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong) NSString *deployId;
 
 
+
+
 /**
  *  内容[未使用]
  */
@@ -679,6 +735,14 @@ NS_ASSUME_NONNULL_BEGIN
  *  会话id
  */
 @property (nonatomic , strong) NSString *cid;
+
+// AiAgent会话id
+@property (nonatomic , strong) NSString *aiAgentCid;
+
+/**
+ 正在接手数据
+ */
+@property (nonatomic , assign) BOOL      isReceiving;
 
 /**
  *  用户id
@@ -796,6 +860,12 @@ NS_ASSUME_NONNULL_BEGIN
  YES 显示，NO不显示
  */
 @property (nonatomic , assign) BOOL showTurnUser;
+
+
+/**
+ ai 机器人转人工意图
+ */
+@property (nonatomic , assign) BOOL transfer_type;
 
 /**
  *  0 没有评价 1已解决  2未解决

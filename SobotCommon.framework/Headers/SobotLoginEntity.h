@@ -60,6 +60,10 @@ extern NSString * _Nullable const SOBOT_LOGIN_MODULE_KEY_CALL_cccv6_whrw;//呼�
 extern NSString * _Nullable const SOBOT_LOGIN_MODULE_KEY_CALL_cccv6_whrw_rwxxbj;//呼叫任务信息编辑
 extern NSString * _Nullable const SOBOT_LOGIN_MODULE_KEY_CALL_cccv6_whrw_rwzjbj;//呼叫任务总结编辑
 
+//拉黑：
+extern NSString * _Nullable const SOBOT_LOGIN_MODULE_KEY_CHAT_BLACK;
+//转接：
+extern NSString * _Nullable const SOBOT_LOGIN_MODULE_KEY_CHAT_TRANSFER;
 
 // ************************** 电销项目的权限 start v6**********************************
 //电话条
@@ -126,13 +130,15 @@ static SobotLoginModuleType _Nullable const SobotLoginModuleType1611  = @"1611";
 static SobotLoginModuleType _Nullable const SobotLoginModuleTypeOrder1231  = @"1231";  // 工单状态，可见与不可见
 
 
-static SobotLoginModuleType _Nullable const SobotLoginModuleTypeBlack  = @"220201";  // 工单状态，可见与不可见
-static SobotLoginModuleType _Nullable const SobotLoginModuleTypeTransfer  = @"220202";  // 工单状态，可见与不可见
-static SobotLoginModuleType _Nullable const SobotLoginModuleTypeDIY_ADMIN  = @"220204";  // 工单状态，可见与不可见
+static SobotLoginModuleType _Nullable const SobotLoginModuleTypeBlack  = @"220201";  // 在线是否有拉黑，使用旧版本验证
+static SobotLoginModuleType _Nullable const SobotLoginModuleTypeTransfer  = @"220202";  // 在线是否转接，使用旧版验证
+static SobotLoginModuleType _Nullable const SobotLoginModuleTypeDIY_ADMIN  = @"220204";  // 未使用
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SobotLoginEntity : SobotBaseEntity
+
+@property(nonatomic,assign) int defaultAppLoginStatus;
 
 // code
 @property (nonatomic,assign) int code;
@@ -217,7 +223,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 // 登录后赋值
-@property(nonatomic,copy) NSString * accessToken;
+//@property(nonatomic,copy) NSString * accessToken;
 
 // 以下为权限接口返回数据
 @property(nonatomic,assign) int  auditRobotdocFlag;
@@ -327,9 +333,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign) int blackFunction;
 
 // 在线接口使用
-@property(nonatomic,copy) NSString *tempId;// 在线产品接口使用
+//@property(nonatomic,copy) NSString *tempId;// 在线产品接口使用
 // 用户状态，2忙碌、1在线,-1在线(有在线会话数据需要同步)  2.6.0新增 1-在线，2-忙碌 statusCode:3-小休，4-培训，5-会议，6-用餐，7-活动
-@property (nonatomic,assign) int        status;
+@property (nonatomic,assign) int  status;
 // 0默认值忙碌 3.小休 4.培训 5.会议 6.用餐 7.活动  (当前客服是在忙碌的状态下 子集的状态码)
 @property (nonatomic,assign) int  statusCode;
 
@@ -341,7 +347,9 @@ NS_ASSUME_NONNULL_BEGIN
 //1030        工单历史记录显示
 @property (nonatomic,strong) NSDictionary * ticketFunction;
 
-
+// 3.3.7版本新增
+//0-关闭，1-开启
+@property (nonatomic,assign) int  readFlag;
 
 // key : SOBOT_LOGIN_MODULE_KEY_
 -(BOOL)checkModule:(NSString *) key;

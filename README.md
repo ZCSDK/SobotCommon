@@ -1,6 +1,8 @@
 # SobotCommon
 SobotCommon.framework
 
+## 2.3.0 [2024-10-31]
+1.[新增]统一鉴权
 
 ## 2.2.10 [2024-04-19]
 1.[新增]座席token登录方式

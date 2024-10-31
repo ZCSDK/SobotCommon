@@ -138,6 +138,9 @@ NSURL* sobotGetResourceUrl(NSString* basePath, NSString* resName, NSString* resT
 // 路径是否存在，不区别文件或路径
 BOOL sobotCheckFileIsExsis(NSString *filePath);
 
+// 文件大小
+long long sobotFileSizeAtPath(NSString *filePath);
+
 // 是文件并且不是路径
 BOOL sobotCheckFilePathIsExsis(NSString *filePath);
 
@@ -203,7 +206,7 @@ NSString *sobotGetCurrentLanguages(void);
 
 // 是否为需要支持RTL语言版本
 BOOL sobotIsRTLLayout(void);
-
+BOOL sobotCheckLanIsRTLLayout(NSString *lan);
 
 /**
  *  获取设备的尺寸

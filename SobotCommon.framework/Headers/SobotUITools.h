@@ -62,6 +62,10 @@ NS_ASSUME_NONNULL_BEGIN
 // 设置国际化RTL适配坐标
 +(void)setRTLFrame:(UIView *)view;
 
+
+/// 是否为竖屏
++(BOOL) sobotIsPortrait;
+
 // 获取当前最上层Window和VC
 +(UIWindow *)getCurWindow;
 + (UIViewController *)getCurrentVC;
